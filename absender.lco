@@ -1,0 +1,131 @@
+\ProvidesFile{absender.lco}
+
+\KOMAoptions{%
+ fromemail=false,       % Email wird im Briefkopf angezeigt
+ fromphone=false,       % Telefonnumer wird im Briefkopf angezeigt
+% fromfax=true,         % Faxnummer wird im Briefkopf angezeit
+ fromurl=false,         % URL wird im Briefkopf angezeigt
+% fromlogo=true,        % Logo wird im Briefkopf angezeigt
+% subject=titled,       % Druckt "Betrifft: " vor dem Betreff
+%locfield=wide,          % Breite Absenderergänzung (location)
+%fromalign=left,         % Ausrichtung des Briefkopfes
+%fromrule=off, %  % Trennlinie unter dem Briefkopf: afteraddress
+ backaddress=off
+}
+\RequirePackage[utf8]{inputenc}
+%\RequirePackage[ngerman]{babel}
+\RequirePackage{lastpage}
+\RequirePackage{etoolbox}  
+
+\newkomavar{fromunit}%
+\newkomavar{fromuniten}%
+\newkomavar{fromuni}%
+\newkomavar{fromunien}%
+\newkomavar{fromaddressen}%
+\setkomavar{backaddress}{}%                % no 'return to' in that window 
+
+\setkomavar{fromname}{Maria Musterfrau} % Name
+\setkomavar{fromaddress}{Adresse, 8010 Graz, Österreich}
+\setkomavar{fromaddressen}{Address, 8010 Graz, Austria}
+\setkomavar{fromemail}{vorname.nachname@uni-graz.at} % Email-Adresse
+\setkomavar{fromphone}{+43 (0) 316/380-0000} % Telefonnummer
+\setkomavar{fromurl}[Website:~]{https://abteilung.uni-graz.at} % Website
+\setkomavar{fromunit}{Organisationseinheit | Fachbereich}
+\setkomavar{fromuniten}{Department | Section}
+%\setkomavar{fromfax}{01234~56789} % Faxnummer
+\setkomavar{subjectseparator}{}   % kein „Betreff:“ davor  
+\setkomavar{fromuni}{Universität Graz}
+\setkomavar{fromunien}{University of Graz}
+
+% ===== Absenderergänzung =====
+%\setkomavar{location}{%
+%  \raggedright\footnotesize{%
+%  \usekomavar{fromname}\\
+%  \usekomavar{fromaddress}\\
+%  \usekomavar*{fromphone}\usekomavar{fromphone}\\
+%  \usekomavar*{fromfax}\usekomavar{fromfax}\\
+%  \usekomavar*{fromemail}\usekomavar{fromemail}
+%  \usekomavar*{fromurl}\usekomavar{fromurl}}%
+%}
+% ============================
+
+% Logo
+% \setkomavar{fromlogo}{\includegraphics{logo.png}}
+% --------------------------------------------------  
+% HEADER: Logos upper right
+% --------------------------------------------------  
+\setkomavar{firsthead}{%  
+  \raggedleft  
+  %\includegraphics[height=2.5cm]{logos/Logo Uni Graz 4c.pdf}\hspace{0.5cm}% 
+  %\includegraphics[height=2.5cm]{logos/Logo Uni Graz Claim Kurz 4c.pdf}\hspace{0.5cm}% 
+  \includegraphics[height=2.5cm]{logos/Institut für Psychologie.pdf}\hspace{0.5cm}%  
+  }
+
+% --------------------------------------------------  
+% ORT + DATUM rechts  
+% --------------------------------------------------  
+\setkomavar{place}{Graz}  
+\setkomavar{date}{\today}   % or specified: {April 28 2026}
+
+% Die Bankverbindung wird nicht automatisch verwendet. Dazu muss bspw. mittels \firstfoot ein eigener Brieffuß definiert werden.
+\setkomavar{frombank}{}
+
+% ===== Signatur =====
+\setkomavar{signature}{%
+% Unterschrift (optional als Grafik einfügen)  
+%\includegraphics[height=2cm]{unterschrift}\\[1ex]  
+  \usekomavar{fromname}%
+}
+\renewcommand*{\raggedsignature}{\raggedright}
+
+% --------------------------------------------------  
+% FUẞZEILE  
+% --------------------------------------------------  
+\providecommand{\lang}{de}% default: German
+\newcommand{\usefromuni}{%
+  \ifdefstring{\lang}{en}%
+    {\usekomavar{fromunien}}%
+    {\usekomavar{fromuni}}%
+}%
+\newcommand{\usefromunit}{%
+  \ifdefstring{\lang}{en}%
+    {\usekomavar{fromuniten}}%
+    {\usekomavar{fromunit}}%
+}%
+\newcommand{\usefromaddress}{%
+  \ifdefstring{\lang}{en}%
+    {\usekomavar{fromaddressen}}%
+    {\usekomavar{fromaddress}}%
+}%
+\newcommand{\usepage}{%
+  \ifdefstring{\lang}{en}%
+    {\thepage{}/\pageref{LastPage}}%
+    {Seite \thepage{} von \pageref{LastPage}}%
+}%
+
+\setkomavar{firstfoot}{%
+  \parbox{\useplength{firstfootwidth}}{\footnotesize
+    \raggedleft
+    \textbf{\usefromuni}\\
+    \makebox[\linewidth][l]{%
+    % ===== Partner Logos =====
+      \smash{%
+        \includegraphics[height=1.5cm]{logos/logo-med-uni-graz.png}%
+        \hspace{3mm}%
+        \includegraphics[height=1.5cm]{logos/TU-Graz.png}%
+      }%
+      \hfill
+      \textbf{\usefromunit}%
+    }\\
+    \usekomavar{fromname}\\
+    \usefromaddress\\
+    \usekomavar{fromphone} | \usekomavar{fromemail}\\
+    \makebox[\linewidth][l]{%
+      \usepage
+      \hfill
+      \usekomavar{fromurl}%
+    }%
+  }%
+} 
+
+% ====================

@@ -1,0 +1,87 @@
+\documentclass[  
+  paper=a4,  
+  fontsize=11pt,  
+  parskip=half,          % Abstand zwischen Absätzen  
+  fromalign=right,       % Absender (wenn verwendet) rechts  
+  version=last  
+]{scrlttr2}  
+  
+%\usepackage[ngerman]{babel}  
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}  
+%\usepackage[utf8]{inputenc}   % falls du noch pdflatex verwendest  
+\usepackage{graphicx}  
+\usepackage{microtype}  
+\usepackage{geometry}  
+\usepackage{fontspec}
+\usepackage{lastpage}  
+\usepackage{etoolbox}
+
+\def\lang{en}   % English letter
+\LoadLetterOption{absender}
+
+% Seitenränder etwas anpassen (nach Bedarf feintunen)  
+\geometry{  
+  left=20mm,  
+  right=20mm,  
+  top=25mm,  
+  bottom=25mm  
+}  
+
+% Schriftarten definieren
+\setmainfont{NunitoSans-Light}[
+Extension = .ttf ,
+Path = fonts/ ,
+BoldFont = NunitoSans-ExtraBold ,
+ItalicFont = NunitoSans-LightItalic ,
+BoldItalicFont = NunitoSans-ExtraBoldItalic ]
+
+\newcommand*{\attachmentfont}{\footnotesize\selectfont\itshape}
+
+% % Seitenzahl links unten  
+% \KOMAoptions{pagenumber=botright}  
+% %\usepackage{fancyhdr}  
+% \pagestyle{fancy}
+% \fancyhf{}%  
+% \fancyfoot[L]{\footnotesize Seite \thepage\ von \pageref{LastPage}}  
+% \usepackage{lastpage}  
+  
+% --------------------------------------------------  
+% BEGINN DES DOKUMENTS  
+% --------------------------------------------------  
+\begin{document}
+
+\begin{letter}{%  
+Company name\\  
+Title First Name Surname\\  
+Address\\  
+ZIP-Code City%  
+}  
+
+% --------------------------------------------------  
+% SUBJECT  
+% --------------------------------------------------  
+\setkomavar{subject}{Subject: "Letter Template for the Department of Psychology, Unistyle"}
+
+\opening{Dear Ladies and Gentlemen,}  
+  
+This is where the actual text of your letter goes.
+You can write paragraphs as usual, use bullet points, etc.
+  
+Another paragraph with more text, so you can see the spacing.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent risus metus, interdum nec turpis sit amet, dignissim aliquet diam. Proin lobortis lectus in purus fermentum ultrices. Phasellus tellus tortor, eleifend a lectus at, volutpat ultricies felis. Morbi feugiat in diam et consectetur. Aliquam vehicula ipsum ligula. Integer tincidunt, eros ut ornare ornare, nunc tortor porttitor erat, id dignissim mauris lectus in quam. Proin rhoncus neque sodales est viverra cursus. Vestibulum id rutrum ipsum. Nam et neque a urna bibendum ultricies. Aliquam pellentesque neque at justo iaculis vulputate. 
+  
+\closing{Sincerely,}
+
+\vspace{1\baselineskip}  
+  \setkomavar*{enclseparator}{\textit{\attachmentfont Attachment(s)}}  
+  \encl{%  
+    \attachmentfont 
+    Attachment 1  
+    \\Attachment 2
+}  
+    
+\end{letter}  
+  
+\end{document}  

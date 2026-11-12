@@ -1,0 +1,87 @@
+\documentclass[  
+  paper=a4,  
+  fontsize=11pt,  
+  parskip=half,          % Abstand zwischen Absätzen  
+  fromalign=right,       % Absender (wenn verwendet) rechts  
+  version=last  
+]{scrlttr2}  
+
+\usepackage[ngerman]{babel} 
+\usepackage[T1]{fontenc}  
+%\usepackage[utf8]{inputenc}   % falls du noch pdflatex verwendest  
+\usepackage{graphicx}  
+\usepackage{microtype}  
+\usepackage{geometry}  
+\usepackage{fontspec}
+\usepackage{lastpage}  
+\usepackage{etoolbox}
+
+\def\lang{de}   % German letter
+\LoadLetterOption{absender}
+
+% Seitenränder etwas anpassen (nach Bedarf feintunen)  
+\geometry{  
+  left=20mm,  
+  right=20mm,  
+  top=25mm,  
+  bottom=25mm  
+}  
+
+% Schriftarten definieren
+\setmainfont{NunitoSans-Light}[
+Extension = .ttf ,
+Path = fonts/ ,
+BoldFont = NunitoSans-ExtraBold ,
+ItalicFont = NunitoSans-LightItalic ,
+BoldItalicFont = NunitoSans-ExtraBoldItalic ]
+
+\newcommand*{\beilagefont}{\footnotesize\selectfont\itshape}
+
+% % Seitenzahl links unten  
+% \KOMAoptions{pagenumber=botright}  
+% %\usepackage{fancyhdr}  
+% \pagestyle{fancy}
+% \fancyhf{}%  
+% \fancyfoot[L]{\footnotesize Seite \thepage\ von \pageref{LastPage}}  
+% \usepackage{lastpage}  
+
+% --------------------------------------------------  
+% BEGINN DES DOKUMENTS  
+% --------------------------------------------------  
+\begin{document}
+
+\begin{letter}{ %  Empfänger
+Firma\\  
+Titel Vorname Nachname\\  
+Adresse\\  
+PLZ Ort%  
+}  
+
+% --------------------------------------------------  
+% BETREFF  
+% --------------------------------------------------  
+\setkomavar{subject}{Betreff: Brief Vorlage Institut für Psychologie im 'unistyle'}
+
+\opening{Sehr geehrte ... ,}  
+  
+Hier kommt der eigentliche Text Ihres Briefes hin. Sie können wie gewohnt Absätze schreiben, Aufzählungszeichen verwenden usw.
+  
+Ein weiterer Absatz mit mehr Text, damit Sie den Zeilenabstand sehen können.
+
+Dies ist ein Typoblindtext. An ihm kann man sehen, ob alle Buchstaben da sind und wie sie aussehen. Manchmal benutzt man Worte wie Hamburgefonts, Rafgenduks oder Handgloves, um Schriften zu testen. Manchmal Sätze, die alle Buchstaben des Alphabets enthalten - man nennt diese Sätze »Pangrams«. Sehr bekannt ist dieser: The quick brown fox jumps over the lazy old dog.
+
+Oft werden in Typoblindtexte auch fremdsprachige Satzteile eingebaut (AVAIL® and Wefox™ are testing aussi la Kerning), um die Wirkung in anderen Sprachen zu testen.
+  
+\closing{Mit freundlichen Grüßen}
+  
+\vspace{1\baselineskip}  
+\setkomavar*{enclseparator}{\beilagefont Beilage(n)}  
+\encl{%  
+\beilagefont
+Beilage 1
+\\Beilage 2  
+}  
+  
+\end{letter}  
+  
+\end{document}
